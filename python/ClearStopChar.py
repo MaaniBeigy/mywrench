@@ -29,7 +29,30 @@ def clear_stop_char(text):
         clear_text = text.replace(stop_dict, regex=True)
         return(clear_text)
     elif isinstance(text, str):
-        rep = dict((re.escape(k), v) for k, v in stop_dict.items())
-        pattern = re.compile("|".join(rep.keys()))
-        clear_text = pattern.sub(lambda m: rep[re.escape(m.group(0))], text)
+        reps = [
+            '\\/',
+            '\\[',
+            '\\]',
+            '\\:',
+            '\\|',
+            '\\"',
+            '\\?',
+            '\\<',
+            '\\>',
+            '\\,',
+            '\\(',
+            '\\)',
+            '\\\\',
+            '\\.',
+            '\\+',
+            '\\-',
+            '\\!',
+            '\\$',
+            '\\`',
+            '\\_',
+            '^\\s+',  # returns string w/o leading whitespace
+            '\\s+$'  # returns string w/o trailing whitespace
+        ]
+        pattern = '|'.join(reps)
+        clear_text = re.sub(pattern, '', text)
         return(clear_text)
