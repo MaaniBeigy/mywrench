@@ -1,0 +1,33 @@
+{
+  "editor.formatOnSave": false,
+  "editor.rulers": [
+    88
+  ],
+  "workbench.colorCustomizations": {
+    "editorRuler.foreground": "#ff4081"
+  },
+  "python.linting.flake8Enabled": false,
+  "extension-manager.extensions": [
+    "ms-python.python",
+    "streetsidesoftware.code-spell-checker",
+    "editorconfig.editorconfig",
+    "2gua.rainbow-brackets",
+    "oderwat.indent-rainbow",
+    "yzhang.markdown-all-in-one",
+  ],
+  "python.testing.pytestArgs": [
+    "spec"
+  ],
+  "python.testing.unittestEnabled": false,
+  "python.testing.nosetestsEnabled": false,
+  "python.testing.pytestEnabled": true,
+  "python.linting.pylintEnabled": true,
+  "git.ignoreLimitWarning": true,
+  "cSpell.words": [
+    "cvcqv",
+    "dtypes",
+    "Pylint",
+    "tada"
+  ],
+  "cSpell.allowCompoundWords": true,
+}
