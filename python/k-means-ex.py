@@ -13,7 +13,7 @@ x = df[[
 
 y = (df['Arousal'] + df['Dominance'] + df['Valence']).to_numpy
 
-
+"""
 distortions = []
 for i in range(1, 11):
     km = KMeans(
@@ -29,7 +29,7 @@ plt.plot(range(1, 11), distortions, marker='o')
 plt.xlabel('Number of clusters')
 plt.ylabel('Distortion')
 plt.show()
- 
+"""
  # The number of clusters is 6 
 
 km_main = KMeans(
@@ -62,7 +62,7 @@ plt.scatter(
 
 plt.scatter(
     x[y_km == 3, 0], x[y_km == 3, 1],
-    s=50, c='purpule',
+    s=50, c='purpules',
     marker='s', edgecolor='black',
     label='cluster 4'
 )
