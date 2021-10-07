@@ -4,36 +4,49 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import scale
 
  # - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
 
 url = 'https://gist.githubusercontent.com/MaaniBeigy/3f55fcc77551b9c2218a9bf19e800f47/raw/8affb3ae2c9fe1725878b0cdc43dfb8da31ba164/df_total.csv'
 df = pd.read_csv(url,index_col=None)
 
-x = df[[
-        'Temperature', 'GSR', 'EOG1', 'EOG2', 'EEG1', 'EEG2', 'RED_RAW',
-       'IR_RAW']].to_numpy()
+df["Temperature"] = StandardScaler().fit_transform(df[["Temperature"]])
+df["GSR"] = StandardScaler().fit_transform(df[["GSR"]])
+df["EOG1"] = StandardScaler().fit_transform(df[["EOG1"]])
+df["EOG2"] = StandardScaler().fit_transform(df[["EOG2"]])
+df["EEG1"] = StandardScaler().fit_transform(df[["EEG1"]])
+df["EEG2"] = StandardScaler().fit_transform(df[["EEG2"]])
+df["RED_RAW"] = StandardScaler().fit_transform(df[["RED_RAW"]])
+df["IR_RAW"] = StandardScaler().fit_transform(df[["IR_RAW"]])
 
-# x_normalized = normalize(x)
+# x = df[[
+#         'Temperature', 'GSR', 'EOG1', 'EOG2', 'EEG1', 'EEG2', 'RED_RAW',
+#        'IR_RAW']].to_numpy()
 
-y = (df['Arousal'] + df['Dominance'] + df['Valence']).to_numpy
+# # x_normalized = normalize(x)
 
-df_cl = df.columns
+# y = (df['Arousal'] + df['Dominance'] + df['Valence']).to_numpy
 
-def st_vec(input):
-    for i in df_cl :
-        df['%s_zscore' %i] = StandardScaler().fit_transform(input)
+# - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
 
-for vec in df_cl : 
-    x_f = df[["%s" %vec]]
-    print (x_f)
-    st_vec(x_f)
+# df_cl = df.columns
 
-df.drop(columns=['Temperature', 'GSR', 'EOG1', 'EOG2', 'EEG1', 'EEG2', 'RED_RAW',
-       'IR_RAW','Arousal','Dominance','Valence'])
- # - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
+# def st_vec(input):
+#     for i in df_cl :
+#         df['%s_zscore' %i] = StandardScaler().fit_transform(input)
 
- # ELBOW MET 1 :
+# for vec in df_cl : 
+#     x_f = df[["%s" %vec]]
+#     print (x_f)
+#     st_vec(x_f)
+
+# df.drop(columns=['Temperature', 'GSR', 'EOG1', 'EOG2', 'EEG1', 'EEG2', 'RED_RAW',
+#        'IR_RAW','Arousal','Dominance','Valence'])
+
+# - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
+
+# ELBOW MET 1 :
 
 # distortions = []
 # for i in range(1, 11):
