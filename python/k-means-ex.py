@@ -2,12 +2,8 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from sklearn import preprocessing
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import normalize
-from sklearn.decomposition import PCA
-from sklearn import metrics
 
  # - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
 
@@ -22,12 +18,19 @@ x = df[[
 
 y = (df['Arousal'] + df['Dominance'] + df['Valence']).to_numpy
 
-def st_vec(input): 
-    df['vector_zscore'] = StandardScaler().fit_transform(input)
+df_cl = df.columns
 
-for vec in df.columns : 
+def st_vec(input):
+    for i in df_cl :
+        df['%s_zscore' %i] = StandardScaler().fit_transform(input)
+
+for vec in df_cl : 
     x_f = df[["%s" %vec]]
+    print (x_f)
     st_vec(x_f)
+
+df.drop(columns=['Temperature', 'GSR', 'EOG1', 'EOG2', 'EEG1', 'EEG2', 'RED_RAW',
+       'IR_RAW','Arousal','Dominance','Valence'])
  # - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
 
  # ELBOW MET 1 :
