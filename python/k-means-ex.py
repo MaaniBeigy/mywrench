@@ -1,39 +1,74 @@
+#IMPORTES :
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from sklearn import preprocessing
 from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import normalize
+from sklearn.decomposition import PCA
+from sklearn import metrics
+
+ # - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
 
 url = 'https://gist.githubusercontent.com/MaaniBeigy/3f55fcc77551b9c2218a9bf19e800f47/raw/8affb3ae2c9fe1725878b0cdc43dfb8da31ba164/df_total.csv'
 df = pd.read_csv(url,index_col=None)
 
 x = df[[
         'Temperature', 'GSR', 'EOG1', 'EOG2', 'EEG1', 'EEG2', 'RED_RAW',
-       'IR_RAW'
-        ]].to_numpy()
+       'IR_RAW']].to_numpy()
+
+# x_normalized = normalize(x)
 
 y = (df['Arousal'] + df['Dominance'] + df['Valence']).to_numpy
 
-"""
-distortions = []
-for i in range(1, 11):
-    km = KMeans(
-        n_clusters=i, init='k-means++',
-        n_init=10, max_iter=300,
-        tol=1e-04, random_state=0
-    )
-    km.fit(x)
-    distortions.append(km.inertia_)
+def st_vec(input): 
+    df['vector_zscore'] = StandardScaler().fit_transform(input)
 
-# plot
-plt.plot(range(1, 11), distortions, marker='o')
-plt.xlabel('Number of clusters')
-plt.ylabel('Distortion')
-plt.show()
-"""
- # The number of clusters is 6 
+for vec in df.columns : 
+    x_f = df[["%s" %vec]]
+    st_vec(x_f)
+ # - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
+
+ # ELBOW MET 1 :
+
+# distortions = []
+# for i in range(1, 11):
+#     km = KMeans(
+#         n_clusters=i, init='k-means++',
+#         n_init=10, max_iter=300,
+#         tol=1e-04, random_state=0
+#     )
+#     km.fit(x)
+#     distortions.append(km.inertia_)
+
+# # plot
+# plt.plot(range(1, 11), distortions, marker='o')
+# plt.xlabel('Number of clusters')
+# plt.ylabel('Distortion')
+# plt.show()
+ 
+ # The number of clusters is 3 USING Elbow-Met
+
+ # - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
+
+ # ELBOW MET 2 :
+
+# from sklearn.datasets import make_blobs
+# from yellowbrick.cluster import KElbowVisualizer
+
+# # Instantiate the clustering model and visualizer
+# model = KMeans()
+# visualizer = KElbowVisualizer(model, k=(1,11))
+
+# visualizer.fit(x)        # Fit the data to the visualizer
+# visualizer.show()        # Finalize and render the figure
+# # With this method the numbers of clusters was 3
+
+ # - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
 
 km_main = KMeans(
-    n_clusters=6, init='k-means++',
+    n_clusters=3, init='k-means++',
     n_init=10, max_iter=300, 
     tol=1e-04, random_state=0
 )
@@ -53,35 +88,15 @@ plt.scatter(
     label='cluster 2'
 )
 
+
 plt.scatter(
     x[y_km == 2, 0], x[y_km == 2, 1],
     s=50, c='lightblue',
     marker='v', edgecolor='black',
     label='cluster 3'
 )
-
-plt.scatter(
-    x[y_km == 3, 0], x[y_km == 3, 1],
-    s=50, c='purpules',
-    marker='s', edgecolor='black',
-    label='cluster 4'
-)
-
-plt.scatter(
-    x[y_km == 4, 0], x[y_km == 4, 1],
-    s=50, c='red',
-    marker='s', edgecolor='black',
-    label='cluster 5'
-)
-
-plt.scatter(
-    x[y_km == 5, 0], x[y_km == 5, 1],
-    s=50, c='yellow',
-    marker='s', edgecolor='black',
-    label='cluster 6'
-)
-
 # plot the centroids
+
 plt.scatter(
     km_main.cluster_centers_[:, 0], km_main.cluster_centers_[:, 1],
     s=250, marker='*',
