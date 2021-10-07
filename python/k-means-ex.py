@@ -20,9 +20,9 @@ df["EEG2"] = StandardScaler().fit_transform(df[["EEG2"]])
 df["RED_RAW"] = StandardScaler().fit_transform(df[["RED_RAW"]])
 df["IR_RAW"] = StandardScaler().fit_transform(df[["IR_RAW"]])
 
-# x = df[[
-#         'Temperature', 'GSR', 'EOG1', 'EOG2', 'EEG1', 'EEG2', 'RED_RAW',
-#        'IR_RAW']].to_numpy()
+x = df[[
+        'Temperature', 'GSR', 'EOG1', 'EOG2', 'EEG1', 'EEG2', 'RED_RAW',
+       'IR_RAW']].to_numpy()
 
 # # x_normalized = normalize(x)
 
@@ -70,16 +70,16 @@ df["IR_RAW"] = StandardScaler().fit_transform(df[["IR_RAW"]])
 
  # ELBOW MET 2 :
 
-# from sklearn.datasets import make_blobs
-# from yellowbrick.cluster import KElbowVisualizer
+from sklearn.datasets import make_blobs
+from yellowbrick.cluster import KElbowVisualizer
 
-# # Instantiate the clustering model and visualizer
-# model = KMeans()
-# visualizer = KElbowVisualizer(model, k=(1,11))
+# Instantiate the clustering model and visualizer
+model = KMeans()
+visualizer = KElbowVisualizer(model, k=(1,11))
 
-# visualizer.fit(x)        # Fit the data to the visualizer
-# visualizer.show()        # Finalize and render the figure
-# # With this method the numbers of clusters was 3
+visualizer.fit(x)        # Fit the data to the visualizer
+#visualizer.show()        # Finalize and render the figure
+# With this method the numbers of clusters was 4
 
  # - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
 
