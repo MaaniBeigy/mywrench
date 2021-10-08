@@ -25,7 +25,7 @@ x = df[[
        'IR_RAW']].to_numpy()
 
 df.shape
-H = hopkins(x,382) #Result is : 0.0033782801361708402 -> Datas are uniformly distibuted
+H = hopkins(x,64074) #Result is : 0.0034266305188508143 -> Datas are uniformly distibuted
 # - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
 # TODO : Fixing These codes : 
 
