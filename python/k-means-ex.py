@@ -4,7 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import scale
+from pyclustertend import hopkins
 
  # - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
 
@@ -24,11 +24,10 @@ x = df[[
         'Temperature', 'GSR', 'EOG1', 'EOG2', 'EEG1', 'EEG2', 'RED_RAW',
        'IR_RAW']].to_numpy()
 
-# # x_normalized = normalize(x)
-
-# y = (df['Arousal'] + df['Dominance'] + df['Valence']).to_numpy
-
+df.shape
+H = hopkins(x,382) #Result is : 0.0033782801361708402 -> Datas are uniformly distibuted
 # - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
+# TODO : Fixing These codes : 
 
 # df_cl = df.columns
 
