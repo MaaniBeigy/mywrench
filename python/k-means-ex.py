@@ -5,9 +5,10 @@ import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from pyclustertend import hopkins
+from sklearn import metrics
 
  # - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
-
+# DATA FRAME :
 url = 'https://gist.githubusercontent.com/MaaniBeigy/3f55fcc77551b9c2218a9bf19e800f47/raw/8affb3ae2c9fe1725878b0cdc43dfb8da31ba164/df_total.csv'
 df = pd.read_csv(url,index_col=None)
 
@@ -24,8 +25,14 @@ x = df[[
         'Temperature', 'GSR', 'EOG1', 'EOG2', 'EEG1', 'EEG2', 'RED_RAW',
        'IR_RAW']].to_numpy()
 
+# - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
+
+# METRICS : 
+
 df.shape
 H = hopkins(x,64074) #Result is : 0.0034266305188508143 -> Datas are uniformly distibuted
+
+
 # - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
 # TODO : Fixing These codes : 
 
@@ -82,12 +89,23 @@ visualizer.fit(x)        # Fit the data to the visualizer
 
  # - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
 
-km_main = KMeans(
-    n_clusters=3, init='k-means++',
-    n_init=10, max_iter=300, 
-    tol=1e-04, random_state=0
-)
-y_km = km_main.fit_predict(x)
+kmeans_model = KMeans(n_clusters=4, random_state=1,init='k-means++').fit(x)
+labels = kmeans_model.labels_
+ # - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
+
+# METRICS : 
+
+H = hopkins(x,64074) #Result is : 0.0034266305188508143 -> Datas are uniformly distibuted
+
+# TODO : Fix lables : 
+clustering_metrics = [
+    metrics.calinski_harabasz_score(x, labels),
+    metrics.homogeneity_score(x, labels),
+    metrics.rand_score(x, labels),
+    metrics.davies_bouldin_score(x, labels),
+    metrics.completeness_score(x, labels),
+    metrics.silhouette_score(x, labels)
+]
 
 plt.scatter(
     x[y_km == 0, 0], x[y_km == 0, 1],
