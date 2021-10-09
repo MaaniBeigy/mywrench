@@ -104,10 +104,10 @@ H = hopkins(x,64074) #Result is : 0.0034266305188508143 -> Datas are uniformly d
 
 # TODO : Fix lables : 
 clustering_metrics = [
-    metrics.calinski_harabasz_score(X_train, labels),
-    metrics.homogeneity_score(labels, labels_pred),
-    metrics.rand_score(labels, labels_pred),
-    metrics.davies_bouldin_score(X_train, labels),
-    metrics.completeness_score(labels, labels_pred),
-    metrics.silhouette_score(X_train, labels)
+    metrics.calinski_harabasz_score(X_train, labels), #9377.479444286533
+    metrics.homogeneity_score(labels, labels_pred), #0.00017892611880187027
+    metrics.rand_score(labels, labels_pred),#0.5083643240212956
+    metrics.davies_bouldin_score(X_train, labels), #1.1200761594594308
+    metrics.completeness_score(labels, labels_pred), #0.0001796496426566734
+    metrics.silhouette_score(X_train, labels), #0.2902319948950943
 ]
