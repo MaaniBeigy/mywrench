@@ -6,6 +6,7 @@ from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from pyclustertend import hopkins
 from sklearn import metrics
+from sklearn.model_selection import train_test_split
 
  # - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
 # DATA FRAME :
@@ -24,6 +25,8 @@ df["IR_RAW"] = StandardScaler().fit_transform(df[["IR_RAW"]])
 x = df[[
         'Temperature', 'GSR', 'EOG1', 'EOG2', 'EEG1', 'EEG2', 'RED_RAW',
        'IR_RAW']].to_numpy()
+
+X_train, X_test = train_test_split(x, test_size=0.5, random_state=0)
 
 # - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
 
@@ -88,8 +91,11 @@ visualizer.fit(x)        # Fit the data to the visualizer
 
  # - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
 
-kmeans_model = KMeans(n_clusters=4, random_state=1,init='k-means++').fit(x)
+kmeans_model = KMeans(n_clusters=4, random_state=1,init='k-means++').fit(X_train)
 labels = kmeans_model.labels_
+
+kmeans_model_pred = KMeans(n_clusters=4, random_state=1,init='k-means++').fit(X_test)
+labels_pred = kmeans_model_pred.labels_
  # - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
 
 # METRICS : 
@@ -98,10 +104,10 @@ H = hopkins(x,64074) #Result is : 0.0034266305188508143 -> Datas are uniformly d
 
 # TODO : Fix lables : 
 clustering_metrics = [
-    metrics.calinski_harabasz_score(x, labels),
-    metrics.homogeneity_score(x, labels),
-    metrics.rand_score(x, labels),
-    metrics.davies_bouldin_score(x, labels),
-    metrics.completeness_score(x, labels),
-    metrics.silhouette_score(x, labels)
+    metrics.calinski_harabasz_score(X_train, labels),
+    metrics.homogeneity_score(labels, labels_pred),
+    metrics.rand_score(labels, labels_pred),
+    metrics.davies_bouldin_score(X_train, labels),
+    metrics.completeness_score(labels, labels_pred),
+    metrics.silhouette_score(X_train, labels)
 ]
