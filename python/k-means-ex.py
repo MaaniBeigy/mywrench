@@ -44,7 +44,6 @@ H = hopkins(x,64074) #Result is : 0.0034266305188508143 -> Datas are uniformly d
 
 # for vec in df_cl : 
 #     x_f = df[["%s" %vec]]
-#     print (x_f)
 #     st_vec(x_f)
 
 # df.drop(columns=['Temperature', 'GSR', 'EOG1', 'EOG2', 'EEG1', 'EEG2', 'RED_RAW',
