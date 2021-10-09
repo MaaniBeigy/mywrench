@@ -29,14 +29,6 @@ x = df[[
 X_train, X_test = train_test_split(x, test_size=0.5, random_state=0)
 
 # - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
-
-# METRICS : 
-
-df.shape
-H = hopkins(x,64074) #Result is : 0.0034266305188508143 -> Datas are uniformly distibuted
-
-
-# - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
 # TODO : Fixing These codes : 
 
 # df_cl = df.columns
