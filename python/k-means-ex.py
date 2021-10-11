@@ -93,13 +93,13 @@ labels_pred = kmeans_model_pred.labels_
 #TODO : Creating Data-Frame for metrics 
 clustering_metrics = {
     "Scores" : [
-    metrics.calinski_harabasz_score(X_train, labels),
-    metrics.homogeneity_score(labels, labels_pred),
-    metrics.rand_score(labels, labels_pred),
-    metrics.davies_bouldin_score(X_train, labels),
-    metrics.completeness_score(labels, labels_pred),
-    metrics.silhouette_score(X_train, labels),
-    hopkins(x,64074)
+        metrics.completeness_score(labels, labels_pred),
+        metrics.homogeneity_score(labels, labels_pred),
+        metrics.calinski_harabasz_score(X_train, labels),
+        metrics.rand_score(labels, labels_pred),
+        metrics.davies_bouldin_score(X_train, labels),
+        metrics.silhouette_score(X_train, labels),
+        hopkins(x,64074)
     ]}
 df_Metrics = pd.DataFrame(data=clustering_metrics, index=["calinski_harabasz", "homogeneity_score",
  "rand_score", "davies_bouldin_score", "completeness_score", "silhouette_score", "hopkins"])
