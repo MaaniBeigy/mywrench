@@ -26,7 +26,7 @@ x = df[[
         'Temperature', 'GSR', 'EOG1', 'EOG2', 'EEG1', 'EEG2', 'RED_RAW',
        'IR_RAW']].to_numpy()
 
-X_train, X_test = train_test_split(x, test_size=0.5, random_state=0)
+X_train, X_test = train_test_split(x, test_size=0.5, random_state=1)
 
 # - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
 # TODO : Fixing These codes : 
