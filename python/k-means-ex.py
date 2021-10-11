@@ -70,7 +70,6 @@ X_train, X_test = train_test_split(x, test_size=0.5, random_state=0)
 
  # ELBOW MET 2 :
 
-from sklearn.datasets import make_blobs
 from yellowbrick.cluster import KElbowVisualizer
 
 # Instantiate the clustering model and visualizer
@@ -91,15 +90,16 @@ labels_pred = kmeans_model_pred.labels_
  # - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
 
 # METRICS : 
-
-H = hopkins(x,64074) #Result is : 0.0034266305188508143 -> Datas are uniformly distibuted
-
-# TODO : Fix lables : 
-clustering_metrics = [
-    metrics.calinski_harabasz_score(X_train, labels), #9377.479444286533
-    metrics.homogeneity_score(labels, labels_pred), #0.00017892611880187027
-    metrics.rand_score(labels, labels_pred),#0.5083643240212956
-    metrics.davies_bouldin_score(X_train, labels), #1.1200761594594308
-    metrics.completeness_score(labels, labels_pred), #0.0001796496426566734
-    metrics.silhouette_score(X_train, labels), #0.2902319948950943
-]
+#TODO : Creating Data-Frame for metrics 
+clustering_metrics = {
+    "Scores" : [
+    metrics.calinski_harabasz_score(X_train, labels),
+    metrics.homogeneity_score(labels, labels_pred),
+    metrics.rand_score(labels, labels_pred),
+    metrics.davies_bouldin_score(X_train, labels),
+    metrics.completeness_score(labels, labels_pred),
+    metrics.silhouette_score(X_train, labels),
+    hopkins(x,64074)
+    ]}
+df_Metrics = pd.DataFrame(data=clustering_metrics, index=["calinski_harabasz", "homogeneity_score",
+ "rand_score", "davies_bouldin_score", "completeness_score", "silhouette_score", "hopkins"])
