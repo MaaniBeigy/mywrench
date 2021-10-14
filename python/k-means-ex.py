@@ -86,10 +86,10 @@ visualizer.show()        # Finalize and render the figure
 
  # - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
 
-kmeans_model = KMeans(n_clusters=5, random_state=1,init='k-means++').fit(X_train)
+kmeans_model = KMeans(n_clusters=4, random_state=1,init='k-means++').fit(X_train)
 labels = kmeans_model.labels_
 
-kmeans_model_pred = KMeans(n_clusters=5, random_state=1,init='k-means++').fit(X_test)
+kmeans_model_pred = KMeans(n_clusters=4, random_state=1,init='k-means++').fit(X_test)
 labels_pred = kmeans_model_pred.labels_
  # - - - - -  - - - - - - - - -  - - - - - - - - - -  - 
 
@@ -116,7 +116,7 @@ principalComponents = pca.fit_transform(x)
 principal_Df = pd.DataFrame(data = principalComponents
              , columns = ['principal component 1', 'principal component 2'])
 
-kmeans_model = KMeans(n_clusters=5, random_state=1,init='k-means++').fit(principalComponents)
+kmeans_model = KMeans(n_clusters=4, random_state=1,init='k-means++').fit(principalComponents)
 
 h = .02     # point in the mesh [x_min, x_max]x[y_min, y_max].
 
