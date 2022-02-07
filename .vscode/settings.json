@@ -24,10 +24,14 @@
   "python.linting.pylintEnabled": true,
   "git.ignoreLimitWarning": true,
   "cSpell.words": [
+    "AVERAGEX",
     "cvcqv",
     "dtypes",
+    "OLAP",
     "Pylint",
-    "tada"
+    "tada",
+    "TOTALMTD",
+    "TOTALYTD"
   ],
   "cSpell.allowCompoundWords": true,
 }
