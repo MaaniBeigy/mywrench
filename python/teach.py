@@ -234,3 +234,13 @@ df7 = pd.read_excel(
     os.path.join(data_path, 'df.xlsx')
 )
 all(df7 == df6)
+
+from sqlalchemy import create_engine
+# https://medium.com/@sara.khorram/inserting-python-dataframe-into-sql-table-increasing-the-speed-760a33db5ab5
+method_6_insert_time_list = []
+engine = create_engine(
+    'mssql+pyodbc:///connection_string=', fast_executemany = True
+)
+dfs_list = []  # list of dayaframes
+for df in dfs_list:
+    df.to_sql('TableName', con = engine , if_exists = 'append', index = False)
