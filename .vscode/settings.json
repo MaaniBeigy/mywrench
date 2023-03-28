@@ -61,6 +61,7 @@
     "tada",
     "TOTALMTD",
     "TOTALYTD",
+    "vstack",
     "xticks",
     "yticks",
     "zorder"
