@@ -45,8 +45,10 @@
     "myheight",
     "myweight",
     "mywrench",
+    "ndarray",
     "notna",
     "nrows",
+    "Numpy",
     "nunique",
     "OLAP",
     "pyclustertend",
@@ -60,6 +62,6 @@
     "xticks",
     "yticks",
     "zorder"
-  ],
+],
   "cSpell.allowCompoundWords": true,
 }
