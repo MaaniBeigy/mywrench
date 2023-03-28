@@ -36,6 +36,7 @@
     "dtype",
     "dtypes",
     "fillna",
+    "hstack",
     "imshow",
     "isin",
     "isna",
