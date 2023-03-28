@@ -33,6 +33,7 @@
     "cvcqv",
     "davies_bouldin_score",
     "dropna",
+    "dtype",
     "dtypes",
     "fillna",
     "imshow",
